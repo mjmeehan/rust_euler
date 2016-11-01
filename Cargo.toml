@@ -4,3 +4,7 @@ version = "0.1.0"
 authors = ["Mike Meehan <mjmeehan@gmail.com>"]
 
 [dependencies]
+
+[lib]
+name = "euler"
+path = "src/lib/euler.rs"
