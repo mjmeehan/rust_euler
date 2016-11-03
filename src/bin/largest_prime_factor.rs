@@ -7,11 +7,11 @@ extern crate euler;
 fn main()
 {
     let factors = euler::factorize(600851475143);
-    for factor in &factors {
-        println!("factor: {}", factor);
+    for (factor, weight) in &factors {
+        println!("factor: {}", *factor);
     }
 
-    let largest_factor = factors.iter().max();
+    let largest_factor = factors.keys().max();
     match largest_factor {
         Some(factor) => println!("factors: {}", factor),
         None => println!("Can't happen, no factors"),

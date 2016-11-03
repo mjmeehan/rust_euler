@@ -27,16 +27,23 @@ pub fn reverse_digits(number: i32) -> i32
     return reversed
 }
 
-pub fn factorize(factorant:i64) -> Vec<i64>
+use std::collections::btree_map::BTreeMap;
+
+pub fn factorize(factorant:i64) -> BTreeMap<i64, i64>
 {
     let mut value = factorant;
-    let mut factors = Vec::new();
-    let max_factor: i64 = (value as f64).sqrt().round() as i64;
+    let mut factors = BTreeMap::new();
+    let max_factor = (value as f64).sqrt().ceil() as i64 + 1;
+    // remove composite factors
     for i in 2..max_factor {
-       if value % i == 0 {
-           factors.push(i);
+       while value % i == 0 {
+           *factors.entry(i).or_insert(0) += 1;
            value /= i;
        }
+    }
+    // number is prime
+    if value > 1 {
+        factors.insert(value, 1);
     }
     factors
 }
