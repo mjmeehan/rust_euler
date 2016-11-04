@@ -7,7 +7,7 @@ extern crate euler;
 fn main()
 {
     let factors = euler::factorize(600851475143);
-    for (factor, weight) in &factors {
+    for factor in factors.keys() {
         println!("factor: {}", *factor);
     }
 

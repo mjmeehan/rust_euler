@@ -29,6 +29,12 @@ pub fn reverse_digits(number: i32) -> i32
 
 use std::collections::btree_map::BTreeMap;
 
+pub fn print_factorial(factor_map: &BTreeMap<i64, i64>) {
+    for (k, v) in factor_map {
+        print!("{} * {} = {} \n", k, v, k * v);
+    }
+}
+
 pub fn factorize(factorant:i64) -> BTreeMap<i64, i64>
 {
     let mut value = factorant;
