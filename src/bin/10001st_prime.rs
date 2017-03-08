@@ -26,5 +26,5 @@ fn main()
         }
         i += 1;
     }
-    print!{"{}\n", cache[10001]};
+    print!{"{}\n", cache[10000]};
 }
