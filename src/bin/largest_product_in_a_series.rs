@@ -67,11 +67,11 @@ fn main()
     for window in vecdigits.windows(range){
         let accum: u64  = window.iter().fold(1, |acc, &x| acc * x as u64);
         if accum > max {
-            print!("New max: {}\n", accum);
+            println!("New max: {}", accum);
             for i in window.iter() {
                 print!("{}, ", i);
             }
-            print!("\n");
+            println!("");
             max = accum;
         }
     }

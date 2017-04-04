@@ -27,5 +27,5 @@ fn main()
     let n = 20;
     let a = sum_of_squares(n);
     let b = square_of_sums(n);
-    print!("{}\n", b-a);
+    println!("{}", b-a);
 }

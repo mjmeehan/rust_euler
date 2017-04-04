@@ -7,31 +7,23 @@
  *  Find the product abc.
  **/
 extern crate euler;
-extern crate rand;
-use rand::Rng;
-use rand::distributions::{IndependentSample, Range};
 
-fn is_pythagorean(Triplet trip) -> bool
+fn is_pythagorean(a: i32, b: i32, c: i32) -> bool
 {
     a * a + b * b == c * c
 }
 
-struct Triplet {
-  a: i32,
-  b: i32,
-  c: i32
-}
-
-fn yield_triplet() -> Triplet
-{
-    let between = Range::new(1, 998);
- 
-
-}
 
 fn main()
 {
-  for 
-    
+    for not_c in 1..998 {
+        let c = 1000 - not_c;
+        for a in 1..not_c {
+           let b = not_c - a;
+           if is_pythagorean(a, b, c) {
+               println!("{} + {} = {}", a, b, c);
+           }
+        }
+    }
 }
 
