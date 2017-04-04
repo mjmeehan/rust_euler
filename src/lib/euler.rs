@@ -24,7 +24,7 @@ pub fn reverse_digits(number: i32) -> i32
         let new_place = (num_digits - 1 - i) as u32;
         reversed += digit * i32::pow(10, new_place);
     }
-    return reversed
+    reversed
 }
 
 use std::collections::btree_map::BTreeMap;

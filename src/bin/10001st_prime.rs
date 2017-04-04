@@ -3,9 +3,8 @@
  * 13. What is the 10 001st prime number?
  **/
 extern crate euler;
-use std::vec;
 
-fn is_prime(n: i64, cache: &Vec<i64>) -> bool
+fn is_prime(n: i64, cache: &[i64]) -> bool
 {
     for prime in cache {
         if n % prime == 0 {
@@ -21,10 +20,10 @@ fn main()
     let mut i = 14;
     while cache.len() < 10002 {
         if is_prime(i, &cache) {
-            print!("found prime {}\n", i);
+            println!("found prime {}", i);
             cache.push(i);
         }
         i += 1;
     }
-    print!{"{}\n", cache[10000]};
+    println!{"{}", cache[10000]};
 }
