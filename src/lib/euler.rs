@@ -29,27 +29,61 @@ pub fn reverse_digits(number: i32) -> i32
 
 use std::collections::btree_map::BTreeMap;
 
-pub fn print_factorial(factor_map: &BTreeMap<i64, i64>) {
+pub fn print_factorial(factor_map: &BTreeMap<i64, i64>)
+{
     for (k, v) in factor_map {
-        print!("{} * {} = {} \n", k, v, k * v);
+        println!("{} * {} = {}", k, v, k * v);
     }
 }
 
-pub fn factorize(factorant:i64) -> BTreeMap<i64, i64>
+pub fn factorize(factorant: i64) -> BTreeMap<i64, i64>
 {
     let mut value = factorant;
     let mut factors = BTreeMap::new();
     let max_factor = (value as f64).sqrt().ceil() as i64 + 1;
     // remove composite factors
     for i in 2..max_factor {
-       while value % i == 0 {
-           *factors.entry(i).or_insert(0) += 1;
-           value /= i;
-       }
+        while value % i == 0 {
+            *factors.entry(i).or_insert(0) += 1;
+            value /= i;
+        }
     }
     // number is prime
     if value > 1 {
         factors.insert(value, 1);
     }
     factors
+}
+
+
+pub fn factorize_with_cache(factorant: i64, cache: &[i64]) -> BTreeMap<i64, i64>
+{
+    let mut value = factorant;
+    let mut factors = BTreeMap::new();
+    let max_factor = (value as f64).sqrt().ceil() as i64 + 1;
+    // remove composite factors
+    for i in cache {
+        while value % i == 0 {
+            *factors.entry(i).or_insert(0) += 1;
+            value /= i;
+        }
+    }
+    // cache exhausted, brute force
+    let brute_force = factorize(value);
+    for (key, value) in brute_force.into_iter() {
+        *factors.entry(key).or_insert(0) += value;
+        cache.push(key);
+    }
+    factors
+}
+
+
+/* cache is a sorted list of all prime numbers */
+fn is_prime(n: i64, cache: &[i64]) -> bool
+{
+    let factors = factorize_with_cache(n, cache);
+    if factors.contains_key(n) {
+        return true
+    }
+    false
 }

@@ -71,7 +71,7 @@ fn main()
             for i in window.iter() {
                 print!("{}, ", i);
             }
-            println!("");
+            println!();
             max = accum;
         }
     }
