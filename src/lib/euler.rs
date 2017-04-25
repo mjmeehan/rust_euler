@@ -58,18 +58,18 @@ pub fn factorize(factorant: i64) -> BTreeMap<i64, i64>
 
 pub fn factorize_with_cache(factorant: i64, cache: &[i64]) -> BTreeMap<i64, i64>
 {
-    let mut value = factorant;
+    let mut melt = factorant;
     let mut factors = BTreeMap::new();
-    let max_factor = (value as f64).sqrt().ceil() as i64 + 1;
+    let max_factor = (factorant as f64).sqrt().ceil() as i64 + 1;
     // remove composite factors
-    for i in cache {
-        while value % i == 0 {
+    for i in cache.iter() {
+        while melt % i == 0 {
             *factors.entry(i).or_insert(0) += 1;
-            value /= i;
+            melt /= i;
         }
     }
     // cache exhausted, brute force
-    let brute_force = factorize(value);
+    let brute_force = factorize(melt);
     for (key, value) in brute_force.into_iter() {
         *factors.entry(key).or_insert(0) += value;
         cache.push(key);
