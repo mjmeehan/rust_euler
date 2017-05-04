@@ -8,15 +8,15 @@ use euler::is_prime;
 
 fn main()
 {
-    let mut primes = Vec::new();
+    let mut primes: Vec<i64> = vec![2, 3, 5];
     let mut sum = 0;
-    primes.push(2).push(3).push(5);
-    for i in 2..10 {
-        if is_prime(i, primes) {
+    for i in 2..2_000_000 {
+        if is_prime(i, &mut primes) {
+            println!("prime {}", i);
             sum += i;
         }
     }
-    println!("{}", sum);
+    println!("sum {}", sum);
 }
 
 

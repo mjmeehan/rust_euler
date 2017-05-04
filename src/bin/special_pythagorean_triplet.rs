@@ -21,7 +21,7 @@ fn main()
         for a in 1..not_c {
            let b = not_c - a;
            if is_pythagorean(a, b, c) {
-               println!("{} + {} = {}", a, b, c);
+               println!("{} + {} = {}; product {}", a, b, c, a * b * c);
            }
         }
     }
