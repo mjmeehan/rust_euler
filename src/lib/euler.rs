@@ -44,10 +44,17 @@ impl EasyConvert for i64 {
     }
 }
 
-pub fn factorize(factorant: i64, start_from: i64) -> BTreeMap<i64, i64>
+pub fn factorize(factorant: i64) -> BTreeMap<i64, i64>
+{
+    factorize_with_start(factorant, 2)
+}
+
+// Returns prime factors
+pub fn factorize_with_start(factorant: i64, start_from: i64) -> BTreeMap<i64, i64>
 {
     let mut value = factorant;
     let mut factors = BTreeMap::new();
+    if factorant == 1 { return factors }
     //let max_factor = (value as f64).sqrt().ceil() as i64 + 1;
     let max_factor = value.sqrt();
     println!("start from {}", start_from);
@@ -55,8 +62,10 @@ pub fn factorize(factorant: i64, start_from: i64) -> BTreeMap<i64, i64>
         factors.insert(value, 1);
         return factors;
     }
+    let start = if start_from > 2 { start_from } else { 2 };
+
     // remove composite factors
-    for i in start_from..max_factor {
+    for i in start..max_factor {
         while value % i == 0 {
             *factors.entry(i).or_insert(0) += 1;
             value /= i;
@@ -72,12 +81,14 @@ pub fn factorize(factorant: i64, start_from: i64) -> BTreeMap<i64, i64>
 pub fn factorize_with_cache(factorant: i64, cache: &mut Vec<i64>, exit_early: bool) -> BTreeMap<i64, i64>
 {
     let mut melt = factorant;
-    let mut max_try = 1;
+    let mut max_try = 2;
     let mut factors = BTreeMap::new();
+    if factorant == 1 { return factors }
     // remove composite factors
     for i in cache.into_iter() {
         max_try = *i;
         while melt % *i == 0 {
+            //println!("factoring... {}, {}, {}", i, melt, max_try);
             *factors.entry(*i).or_insert(0) += 1;
             melt /= *i;
             if exit_early {
@@ -88,11 +99,13 @@ pub fn factorize_with_cache(factorant: i64, cache: &mut Vec<i64>, exit_early: bo
             }
         }
     }
+    if melt == 1 { return factors }
 
     // cache exhausted, brute force
     println!("Melting {}", melt);
-    let brute_force = factorize(melt, max_try);
-    for (key, value) in brute_force.into_iter() {
+    let brute_force = factorize_with_start(melt, max_try);
+    for (key, value) in brute_force {
+        println!("Adding prime {} * {}", key, value);
         *factors.entry(key).or_insert(0) += value;
         cache.push(key);
     }
@@ -104,7 +117,7 @@ pub fn factorize_with_cache(factorant: i64, cache: &mut Vec<i64>, exit_early: bo
 pub fn is_prime(n: i64, cache: &mut Vec<i64>) -> bool
 {
     let factors = factorize_with_cache(n, cache, true);
-    if factors.contains_key(&n) || factors.len() == 0 {
+    if factors.contains_key(&n) || factors.is_empty() {
         return true
     }
     false

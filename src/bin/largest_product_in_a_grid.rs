@@ -39,7 +39,7 @@ fn parse_text(text: &str) -> ProblemMatrix {
     let mut j;
     for row in text.lines() {
         j = 0;
-        for number in row.split(" ") {
+        for number in row.split(' ') {
             matrix[i][j] = FromStr::from_str(number).unwrap();
             print!("[{} ,{}]: {} ", i, j, matrix[i][j]);
             j += 1;
@@ -58,8 +58,8 @@ fn find_max(matrix: &ProblemMatrix, i: usize, j: usize) -> i64
     for direction in directions {
         let mut product: i64 = 1;
         for offset in 1..5 {
-            let i_d = (i as i8 + direction.0 * offset);
-            let j_d = (j as i8 + direction.1 * offset);
+            let i_d = i as i8 + direction.0 * offset;
+            let j_d = j as i8 + direction.1 * offset;
             if i_d > 19 || j_d > 19 || i_d < 0 || j_d < 0 { break; }
             product *= matrix[i_d as usize][j_d as usize] as i64;
         }

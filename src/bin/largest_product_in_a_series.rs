@@ -27,14 +27,23 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 What is the value of this product?
 **/
 
-fn str2vec(word: &str) -> Vec<u8>
+extern crate nom;
+type SmallNumber = i8;
+
+fn str2vec(word: &str) -> Vec<SmallNumber>
 {
-    let mut newvec = Vec::new();
+    let mut new_vec: Vec<SmallNumber> = Vec::new();
     for a in word.chars() {
-        let num = a.to_digit(10).unwrap() as u8;
-        newvec.push(num);
+        let num = a.to_digit(10).unwrap() as SmallNumber;
+        new_vec.push(num);
     }
-    newvec
+    new_vec
+}
+
+fn parse_str(word: &str) -> Vec<SmallNumber>
+{
+    let mut new_vec: Vec<SmallNumber> = Vec::new();
+    new_vec
 }
 
 fn main()
@@ -65,7 +74,7 @@ fn main()
     let mut max = 0;
 
     for window in vecdigits.windows(range){
-        let accum: u64  = window.iter().fold(1, |acc, &x| acc * x as u64);
+        let accum = window.iter().fold(1, |acc: i64, &x| acc * i64::from(x));
         if accum > max {
             println!("New max: {}", accum);
             for i in window.iter() {
