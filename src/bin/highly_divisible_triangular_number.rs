@@ -44,7 +44,7 @@ fn main()
 
         let divisors = count_divisors(&factors);
         println!("trinum {} = {}. {} divisors", i, trinum, divisors);
-        if divisors >= 500 {
+        if divisors > 500 {
             for (factor, freq) in factors.clone() {
                 print!("{}^{} * ", factor, freq);
             }

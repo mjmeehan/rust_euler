@@ -5,7 +5,7 @@
 use std::i32;
 use std::f64;
 
-fn count_digits(number: i32) -> i32
+pub fn count_digits(number: i32) -> i32
 {
     f64::floor(f64::log10(number as f64)) as i32 + 1
 }
