@@ -17,9 +17,8 @@ fn main() {
             sum += x;
         }
         temp = x;
-        x +=  n0;
+        x += n0;
         n0 = temp;
     }
     println!("sum is {}", sum)
 }
-

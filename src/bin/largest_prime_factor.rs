@@ -4,8 +4,7 @@
 **/
 extern crate euler;
 
-fn main()
-{
+fn main() {
     let factors = euler::factorize(600851475143);
     for factor in factors.keys() {
         println!("factor: {}", *factor);
@@ -17,5 +16,3 @@ fn main()
         None => println!("Can't happen, no factors"),
     }
 }
-
-

@@ -1,7 +1,7 @@
 /**
  Problem 13
 
-Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.u32
+Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 **/
 
 const DIGITS: &str = "37107287533902102798797998220837590246510135740250
@@ -110,30 +110,33 @@ use std::str;
 // 100 50-digit numbers
 type ProblemMatrix = Vec<Vec<u8>>;
 
-
-fn parse_digits(digits: &str) -> ProblemMatrix
-{
+fn parse_digits(digits: &str) -> ProblemMatrix {
     let mut matrix: ProblemMatrix = Vec::with_capacity(100);
     for line in digits.lines() {
-        let row = line.chars()
+        let row = line
+            .chars()
             .filter_map(|x| x.to_digit(10))
             .map(|x| x as u8)
             .collect();
-        // println!("{:?}", row);
+        println!("{:?}", row);
         matrix.push(row);
     }
     return matrix;
 }
 
-fn main()
-{
+fn main() {
     // println!("{}", DIGITS);
     let matrix: ProblemMatrix = parse_digits(DIGITS);
     let mut accum = Vec::new();
     for digit in 0..13 {
-        accum.push(matrix.iter().map(|row| row[digit]).fold(0, |acc, x| acc + x as u32));
+        accum.push(
+            matrix
+                .iter()
+                .map(|row| row[digit])
+                .fold(0, |acc, x| acc + x as u32),
+        );
     }
     println!("{:?}", accum);
     let sum = accum.iter().fold(0, |acc: u128, &x| acc * 10 + x as u128);
-    println!{"{}", sum}
+    println! {"{}", sum}
 }

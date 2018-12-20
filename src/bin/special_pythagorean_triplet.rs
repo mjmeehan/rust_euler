@@ -8,22 +8,18 @@
  **/
 extern crate euler;
 
-fn is_pythagorean(a: i32, b: i32, c: i32) -> bool
-{
+fn is_pythagorean(a: i32, b: i32, c: i32) -> bool {
     a * a + b * b == c * c
 }
 
-
-fn main()
-{
+fn main() {
     for not_c in 1..998 {
         let c = 1000 - not_c;
         for a in 1..not_c {
-           let b = not_c - a;
-           if is_pythagorean(a, b, c) {
-               println!("{} + {} = {}; product {}", a, b, c, a * b * c);
-           }
+            let b = not_c - a;
+            if is_pythagorean(a, b, c) {
+                println!("{} + {} = {}; product {}", a, b, c, a * b * c);
+            }
         }
     }
 }
-

@@ -6,8 +6,7 @@
 **/
 extern crate euler;
 
-fn main()
-{
+fn main() {
     let mut largest = 1_i32;
     for x in 1..100 {
         for y in 1..100 {

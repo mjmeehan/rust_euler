@@ -27,7 +27,6 @@ The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
 
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 */
-
 use std::str::FromStr;
 
 type ProblemMatrix = [[u8; 20]; 20];
@@ -35,7 +34,7 @@ type ProblemMatrix = [[u8; 20]; 20];
 // bet this whole function could be iterator magic instead
 fn parse_text(text: &str) -> ProblemMatrix {
     let mut matrix: ProblemMatrix = [[0; 20]; 20];
-    let mut i=0;
+    let mut i = 0;
     let mut j;
     for row in text.lines() {
         j = 0;
@@ -43,7 +42,6 @@ fn parse_text(text: &str) -> ProblemMatrix {
             matrix[i][j] = FromStr::from_str(number).unwrap();
             print!("[{} ,{}]: {} ", i, j, matrix[i][j]);
             j += 1;
-
         }
         println!();
         i += 1;
@@ -51,26 +49,40 @@ fn parse_text(text: &str) -> ProblemMatrix {
     matrix
 }
 
-fn find_max(matrix: &ProblemMatrix, i: usize, j: usize) -> i64
-{
+fn find_max(matrix: &ProblemMatrix, i: usize, j: usize) -> i64 {
     let mut max_val: i64 = 1;
-    let directions: Vec<(i8, i8)>= vec![(0,1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, 1)];
+    let directions: Vec<(i8, i8)> = vec![
+        (0, 1),
+        (0, -1),
+        (1, 0),
+        (-1, 0),
+        (1, 1),
+        (1, -1),
+        (-1, 1),
+        (-1, 1),
+    ];
     for direction in directions {
         let mut product: i64 = 1;
         for offset in 1..5 {
             let i_d = i as i8 + direction.0 * offset;
             let j_d = j as i8 + direction.1 * offset;
-            if i_d > 19 || j_d > 19 || i_d < 0 || j_d < 0 { break; }
+            if i_d > 19 || j_d > 19 || i_d < 0 || j_d < 0 {
+                break;
+            }
             product *= matrix[i_d as usize][j_d as usize] as i64;
         }
-        if product > max_val { max_val = product; println!("{}, {}; {}, {}: {}", i, j, direction.0, direction.1, product)}
+        if product > max_val {
+            max_val = product;
+            println!(
+                "{}, {}; {}, {}: {}",
+                i, j, direction.0, direction.1, product
+            )
+        }
     }
     max_val
 }
 
-
-fn main()
-{
+fn main() {
     let problem_text = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -97,7 +109,10 @@ fn main()
     for i in 0..20 {
         for j in 0..20 {
             let cell_max = find_max(&matrix, i, j);
-            if cell_max > accum_max { accum_max = cell_max; println!("accum_max: {}", accum_max) }
+            if cell_max > accum_max {
+                accum_max = cell_max;
+                println!("accum_max: {}", accum_max)
+            }
         }
     }
     println!("max: {}", accum_max);

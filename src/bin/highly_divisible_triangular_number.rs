@@ -18,24 +18,23 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
 **/
-
 extern crate euler;
 
 use std::collections::btree_map::BTreeMap;
 
 // thx gauss
 fn nth_triangular(n: i64) -> i64 {
-    n * (n+1) / 2
+    n * (n + 1) / 2
 }
 
-fn count_divisors(factors: &BTreeMap<i64, i64>) -> i64
-{
-    factors.into_iter().fold(1, |acc, (_factor, freq)| acc * (freq + 1))
+fn count_divisors(factors: &BTreeMap<i64, i64>) -> i64 {
+    factors
+        .into_iter()
+        .fold(1, |acc, (_factor, freq)| acc * (freq + 1))
 }
 
 // seems like there could be a closed form solution, but here goes brute force
-fn main()
-{
+fn main() {
     let mut cache: Vec<i64> = Vec::new();
     for i in 1..1000000 {
         let trinum = nth_triangular(i);

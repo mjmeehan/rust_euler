@@ -4,8 +4,7 @@
  **/
 extern crate euler;
 
-fn is_prime(n: i64, cache: &[i64]) -> bool
-{
+fn is_prime(n: i64, cache: &[i64]) -> bool {
     for prime in cache {
         if n % prime == 0 {
             return false;
@@ -14,8 +13,7 @@ fn is_prime(n: i64, cache: &[i64]) -> bool
     true
 }
 
-fn main()
-{
+fn main() {
     let mut cache = vec![2, 3, 5, 7, 11, 13];
     let mut i = 14;
     while cache.len() < 10002 {
@@ -25,5 +23,5 @@ fn main()
         }
         i += 1;
     }
-    println!{"{}", cache[10000]};
+    println! {"{}", cache[10000]};
 }

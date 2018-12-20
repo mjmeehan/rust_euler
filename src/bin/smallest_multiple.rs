@@ -5,11 +5,10 @@
  *  the numbers from 1 to 20?
 **/
 extern crate euler;
-use std::collections::btree_map::BTreeMap;
 use std::cmp;
+use std::collections::btree_map::BTreeMap;
 
-fn main()
-{
+fn main() {
     let mut grand_factor = BTreeMap::new();
     for divisor in 1..21 {
         println!("divisor: {}", divisor);
