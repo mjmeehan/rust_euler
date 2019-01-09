@@ -2,10 +2,11 @@
 name = "rust_euler"
 version = "0.1.0"
 authors = ["Mike Meehan <mjmeehan@gmail.com>"]
+edition = "2018"
 
 [dependencies]
 rand = "0.3"
-nom = "2.2"
+num = "0.2"
 
 [lib]
 name = "euler"
